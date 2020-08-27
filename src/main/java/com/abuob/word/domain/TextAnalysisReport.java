@@ -18,7 +18,7 @@ public class TextAnalysisReport {
     @Column(name = "report_key", nullable = false, updatable = false)
     private UUID reportKey;
 
-    @Column(name = "text", nullable = false, updatable = false)
+    @Column(name = "text", nullable = false, updatable = false, columnDefinition = "TEXT")
     private String text;
 
     @Column(name = "exclude_stop_words", nullable = false, updatable = false)

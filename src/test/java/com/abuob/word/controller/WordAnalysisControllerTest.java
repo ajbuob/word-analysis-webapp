@@ -7,8 +7,6 @@ import com.abuob.word.service.TextProcessingRequestHandler;
 import com.abuob.word.translator.TextAnalysisResponseTranslator;
 import com.abuob.word.web.TextAnalysisCountResponse;
 import com.abuob.word.web.TextAnalysisResponse;
-import com.abuob.word.web.TextProcessingRequest;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,6 +15,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -30,7 +29,7 @@ import java.util.UUID;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
@@ -129,9 +128,12 @@ public class WordAnalysisControllerTest {
 
         final String inputText = "ABC DEF\\n PQR XYZ";
 
-        mockMvc.perform(post("/word-analysis/report")
-                .content(buildJsonString(new TextProcessingRequest(inputText, true, true)))
-                .contentType(MediaType.APPLICATION_JSON)
+        MockMultipartFile multipartFile =
+                new MockMultipartFile("file", "testFile.txt", "text/plain", inputText.getBytes());
+
+        mockMvc.perform(multipart("/word-analysis/report").file(multipartFile)
+                .param("excludeStopWords", "true")
+                .param("groupStemWords", "true")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.reportId").isNotEmpty())
@@ -177,13 +179,5 @@ public class WordAnalysisControllerTest {
                 .andExpect(jsonPath("$.utcProcessingDateTime").value(UTC_NOW.toString()))
                 .andExpect(jsonPath("$.excludeStopWords").value(Boolean.TRUE))
                 .andExpect(jsonPath("$.groupStemWords").value(Boolean.TRUE));
-    }
-
-    public static String buildJsonString(final Object object) {
-        try {
-            return new ObjectMapper().writeValueAsString(object);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 }

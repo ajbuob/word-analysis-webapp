@@ -13,7 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Optional;
@@ -33,7 +35,16 @@ public class WordAnalysisController {
     private final TextAnalysisResponseTranslator textAnalysisResponseTranslator;
 
     @PostMapping
-    public ResponseEntity<TextProcessingResponse> processInputText(@RequestBody TextProcessingRequest textProcessingRequest) {
+    public ResponseEntity<TextProcessingResponse> processInputText(@RequestParam("file") MultipartFile multipartFile,
+                                                                   @RequestParam(value = "excludeStopWords") boolean excludeStopWords,
+                                                                   @RequestParam(value = "groupStemWords") boolean groupStemWords) throws IOException {
+
+        final String multipartFileContents = new String(multipartFile.getBytes());
+
+        final TextProcessingRequest textProcessingRequest = new TextProcessingRequest();
+        textProcessingRequest.setText(multipartFileContents);
+        textProcessingRequest.setExcludeStopWords(excludeStopWords);
+        textProcessingRequest.setGroupStemWords(groupStemWords);
 
         LocalDateTime utcNow = LocalDateTime.now(ZoneOffset.UTC);
         UUID reportId = UUID.randomUUID();
