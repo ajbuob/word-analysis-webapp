@@ -27,6 +27,7 @@ Example Response:
 ```
 
 GET /word-analysis/report/<REPORT_ID>
+
 Example Response:
 ```json
 {
