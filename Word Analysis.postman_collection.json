@@ -1,0 +1,81 @@
+{
+	"info": {
+		"_postman_id": "512055aa-53ec-49e6-b2db-bcc179358b72",
+		"name": "Word Analysis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST 1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/alexanderbuob/Desktop/exercisedocument.txt"
+						},
+						{
+							"key": "excludeStopWords",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "groupStemWords",
+							"value": "true",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8181/word-analysis/report",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"word-analysis",
+						"report"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET 1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8181/word-analysis/report/1800b4ea-45fc-4be2-9e14-af74349e6a3a",
+					"host": [
+						"localhost"
+					],
+					"port": "8181",
+					"path": [
+						"word-analysis",
+						"report",
+						"1800b4ea-45fc-4be2-9e14-af74349e6a3a"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
