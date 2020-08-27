@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+#  wordAnalysis:
+#    container_name: word-analysis-webapp
+#    image: word-analysis-webapp
+#    build: ./
+#    ports:
+#      - "8181:8181"
+#    depends_on:
+#      - postgres
+  postgres:
+    image: mdillon/postgis:11-alpine
+    environment:
+      POSTGRES_PASSWORD: dev
+      POSTGRES_USER: dev
+      POSTGRES_DB: word_analysis
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgresql-data:/var/lib/postgresql/data
