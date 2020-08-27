@@ -9,7 +9,6 @@ import com.abuob.word.web.TextProcessingRequest;
 import com.abuob.word.web.TextProcessingResponse;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -61,7 +60,7 @@ public class WordAnalysisController {
 
         Optional<TextAnalysisReport> textAnalysisReportOptional = textAnalysisReportService.findTextAnalysisByReportKey(reportId);
 
-        if (!textAnalysisReportOptional.isPresent()) {
+        if (textAnalysisReportOptional.isEmpty()) {
             log.error("No report found for reportId: {}", reportId);
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
