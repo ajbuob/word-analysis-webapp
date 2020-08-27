@@ -13,7 +13,7 @@
 ## Endpoints
 POST /word-analysis/report
 
-#####Parameters:
+##### Parameters:
 * file: file containing the words for analysis
 * excludeStopWords: true|false
 * groupStemWords: true|false
