@@ -8,7 +8,7 @@
 
 ## Architecture
 * Spring Boot Gradle-based web application that supports file upload processing via async POST request as well as GET endpoint to retrieve text analysis results.
-* Application runs on port 8181 and can be changed in projects resources/application.yml file id desired
+* Application runs on port 8181 and can be changed in projects resources/application.yml file if desired
 
 ## Endpoints
 
