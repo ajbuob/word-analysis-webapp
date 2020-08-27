@@ -16,11 +16,14 @@
 * Test cases located in src/test/java and can be run as part of the standard Gradle build task or with a run configuration in any IDE.
 * I have included the exported Postman collection file (Word_Analysis.postman_collection.json) in the projects root directory and this can be used for any integration testing.
 
-## Integration Tests
-* ![GET1](/images/GET1.png)
-* ![POST1](/images/POST1.png)
-* ![GET2](/images/GET2.png)
-* ![POST2](/images/POST2.png)
+# Integration Tests With exercisedocument.text
+#### excludeStopWords=true groupStemWords=true
+![POST1](/images/POST1.png) 
+![GET1](/images/GET1.png)
+
+#### excludeStopWords=true groupStemWords=false
+![POST2](/images/POST2.png)
+![GET2](/images/GET2.png)
 
 ## Logging
 * Application logging changed in the projects resources/log4j2.yaml file
