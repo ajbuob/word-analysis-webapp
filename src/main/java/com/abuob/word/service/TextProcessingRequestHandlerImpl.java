@@ -17,7 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class TextProcessingRequestHandlerImpl implements TextProcessingRequestHandler {
 
-    private static final String ALPHANUMERIC_AND_WHITESPACE_REGEX = "[^a-zA-Z0-9\\s]";
+    private static final String ALPHA_AND_WHITESPACE_REGEX = "[^a-zA-Z\\s]";
 
     private static final String WHITESPACE_REGEX = "\\s+";
 
@@ -59,7 +59,7 @@ public class TextProcessingRequestHandlerImpl implements TextProcessingRequestHa
         while (stringTokenizer.hasMoreTokens()) {
             line = stringTokenizer.nextToken();
 
-            cleanLine = line.replaceAll(ALPHANUMERIC_AND_WHITESPACE_REGEX, "");
+            cleanLine = line.replaceAll(ALPHA_AND_WHITESPACE_REGEX, "");
 
             //Keep track of the lines being processed to save to the database
             processedTextStringBuffer.append(cleanLine + "\n");
