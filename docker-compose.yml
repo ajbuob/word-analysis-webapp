@@ -10,6 +10,7 @@ services:
 #    depends_on:
 #      - postgres
   postgres:
+    container_name: word_analysis_database
     image: mdillon/postgis:11-alpine
     environment:
       POSTGRES_PASSWORD: dev
